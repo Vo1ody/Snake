@@ -1,0 +1,71 @@
+﻿<Window x:Class="Exam.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Exam"
+        mc:Ignorable="d"
+        Title="Snake" 
+        Height="480" MinHeight="480"
+        Width="480" MinWidth="480"
+        Visibility="Visible"
+        SizeToContent="WidthAndHeight" KeyDown="GameField_KeyDown">
+    <Grid>
+        <!-- == GAME ===================================================================== -->
+        <Grid x:Name="GameGrid" Visibility="Hidden" ClipToBounds="True">
+            <Menu VerticalContentAlignment="Center" VerticalAlignment="Top" Background="#FF10722F" Height="18">
+                <MenuItem Header="Время:" VerticalContentAlignment="Center" Foreground="White"/>
+                <MenuItem x:Name="TimeValue" Header="00:00:00" VerticalContentAlignment="Center" Foreground="White"/>
+                <Separator/>
+                <MenuItem Header="Очки:" VerticalContentAlignment="Center" Foreground="White"/>
+                <MenuItem x:Name="ScoreValue" Header="0" VerticalContentAlignment="Center" Foreground="White"/>
+            </Menu>
+            <!-- == GAME FIELD ========================================================================= -->
+            <Canvas ClipToBounds="True" Margin="0,18,0,0" x:Name="GameField" 
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    KeyDown="GameField_KeyDown" Background="PaleGreen">
+            </Canvas>
+            <!-- == DEBUG FIELD ========================================================================= -->
+            <StackPanel Visibility="Collapsed" Orientation="Vertical" Margin="3,24,3,3" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#BFFFFFFF">
+                <Label Content="Debug:"/>
+                <Separator Margin="5,0,15,0"/>
+                <DockPanel>
+                    <Label DockPanel.Dock="Left" Content="X:"/>
+                    <Label DockPanel.Dock="Right" x:Name="debug_snakeX"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label DockPanel.Dock="Left" Content="Y:"/>
+                    <Label DockPanel.Dock="Right" x:Name="debug_snakeY"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label DockPanel.Dock="Left" Content="Points num:"/>
+                    <Label DockPanel.Dock="Right" x:Name="debug_snakePointsNum"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label DockPanel.Dock="Left" Content="Last button:"/>
+                    <Label DockPanel.Dock="Right" x:Name="debug_lastButton"/>
+                </DockPanel>
+            </StackPanel>
+        </Grid>
+        <!-- == MENU ===================================================================== -->
+        <Grid x:Name="MenuGrid" Visibility="Visible" Background="#FF38788D">
+            <Label x:Name="MenuStatus" Content="Игра 'Змейка'" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" MaxWidth="{Binding Width, ElementName=window}" Margin="0,0,0, 150" Foreground="White" RenderTransformOrigin="0.5,0.5">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <StackPanel Margin="0,40,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
+                <Button Height="30" Content="Играть" Click="Menu_Play_Click" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}"/>
+                <!--
+                <Button Content="{DynamicResource Menu_Options}" IsEnabled="False" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}"/>
+                -->
+                <Button Height="30" Content="Выход" Click="Menu_Exit_Click" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
